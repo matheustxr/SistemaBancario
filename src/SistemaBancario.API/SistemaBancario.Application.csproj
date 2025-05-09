@@ -18,8 +18,4 @@
     <ProjectReference Include="..\SistemaBancario.Exception\SistemaBancario.Exception.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="UseCases\Wallets\" />
-  </ItemGroup>
-
 </Project>

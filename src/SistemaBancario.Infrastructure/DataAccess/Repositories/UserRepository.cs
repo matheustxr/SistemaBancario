@@ -18,9 +18,9 @@ namespace SistemaBancario.Infrastructure.DataAccess.Repositories
             return await _dbContext.Users.AsNoTracking().FirstOrDefaultAsync(user => user.Email.Equals(email));
         }
 
-        public Task Add(User user)
+        public async Task Add(User user)
         {
-            throw new NotImplementedException();
+            await _dbContext.Users.AddAsync(user);
         }
 
     }

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Habits.Exception {
+namespace SistemaBancario.Exception {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Habits.Exception {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Habits.Exception.ResourceErrorMessages", typeof(ResourceErrorMessages).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SistemaBancario.Exception.ResourceErrorMessages", typeof(ResourceErrorMessages).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -57,15 +57,6 @@ namespace Habits.Exception {
             }
             set {
                 resourceCulture = value;
-            }
-        }
-        
-        /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a Description is too long, the value max is 500 character.
-        /// </summary>
-        public static string DESCRIPTION_TOO_LONG {
-            get {
-                return ResourceManager.GetString("DESCRIPTION_TOO_LONG", resourceCulture);
             }
         }
         
@@ -106,29 +97,11 @@ namespace Habits.Exception {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a Habit not found..
-        /// </summary>
-        public static string HABIT_NOT_FOUND {
-            get {
-                return ResourceManager.GetString("HABIT_NOT_FOUND", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Your password should be a minimum of 8 characters, containing at least one uppercase letter, one lowercase letter, one number, and one special character (e.g., !, ?, *, .)..
         /// </summary>
         public static string INVALID_PASSWORD {
             get {
                 return ResourceManager.GetString("INVALID_PASSWORD", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a One or more days of the week are invalid..
-        /// </summary>
-        public static string INVALID_WEEKDAY {
-            get {
-                return ResourceManager.GetString("INVALID_WEEKDAY", resourceCulture);
             }
         }
         
@@ -142,56 +115,11 @@ namespace Habits.Exception {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a The password entered is different from the current password..
-        /// </summary>
-        public static string PASSWORD_DIFFERENT_CURRENT_PASSWORD {
-            get {
-                return ResourceManager.GetString("PASSWORD_DIFFERENT_CURRENT_PASSWORD", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a This title is already registered..
-        /// </summary>
-        public static string TITLE_ALREADY_REGISTERED {
-            get {
-                return ResourceManager.GetString("TITLE_ALREADY_REGISTERED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a The title cannot be empty.
-        /// </summary>
-        public static string TITLE_EMPTY {
-            get {
-                return ResourceManager.GetString("TITLE_EMPTY", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a The title is required.
-        /// </summary>
-        public static string TITLE_REQUIRED {
-            get {
-                return ResourceManager.GetString("TITLE_REQUIRED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Unknown error.
         /// </summary>
         public static string UNKNOW_ERRO {
             get {
                 return ResourceManager.GetString("UNKNOW_ERRO", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a The days of the week cannot be empty.
-        /// </summary>
-        public static string WEEKDAYS_EMPTY {
-            get {
-                return ResourceManager.GetString("WEEKDAYS_EMPTY", resourceCulture);
             }
         }
     }

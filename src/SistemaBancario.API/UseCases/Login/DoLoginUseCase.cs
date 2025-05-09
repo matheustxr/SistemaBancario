@@ -1,8 +1,8 @@
-﻿using Habits.Exception.ExceptionBase;
-using SistemaBancario.Communication.Requests;
+﻿using SistemaBancario.Communication.Requests;
 using SistemaBancario.Domain.Repositories.User;
 using SistemaBancario.Domain.Security.Cryptography;
 using SistemaBancario.Domain.Security.Tokens;
+using SistemaBancario.Exception.ExceptionBase;
 
 namespace SistemaBancario.Application.UseCases.Login
 {

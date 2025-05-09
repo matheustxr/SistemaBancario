@@ -1,7 +1,7 @@
 ﻿using System.Text.RegularExpressions;
 using FluentValidation;
 using FluentValidation.Validators;
-using Habits.Exception;
+using SistemaBancario.Exception;
 
 namespace SistemaBancario.Application.UseCases.Users
 {

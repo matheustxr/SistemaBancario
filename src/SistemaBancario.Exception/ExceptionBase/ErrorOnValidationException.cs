@@ -1,7 +1,6 @@
 ﻿using System.Net;
-using SistemaBancario.Exception.ExceptionBase;
 
-namespace Habits.Exception.ExceptionBase;
+namespace SistemaBancario.Exception.ExceptionBase;
 
 public class ErrorOnValidationException : AppException
 {

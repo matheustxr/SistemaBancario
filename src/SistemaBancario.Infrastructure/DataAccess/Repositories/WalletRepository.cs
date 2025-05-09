@@ -1,12 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.EntityFrameworkCore;
+using SistemaBancario.Domain.Entities;
+using SistemaBancario.Domain.Repositories.Wallets;
 
 namespace SistemaBancario.Infrastructure.DataAccess.Repositories
 {
-    public class WalletRepository
+    public class WalletRepository : IWalletReadOnlyRepository, IWalletWriteOnlyRepository
     {
+        private readonly SistemaBancarioDbContext _dbContext;
+        public WalletRepository(SistemaBancarioDbContext dbContext) => _dbContext = dbContext;
+
+        public async Task<Wallet?> GetById(long walletId)
+        {
+            return await _dbContext.Wallets
+                .AsNoTracking() 
+                .FirstOrDefaultAsync(wallet => wallet.Id == walletId);
+        }
+
+        public async Task<Wallet?> GetByUserId(User user)
+        {
+            return await _dbContext.Wallets
+                .AsNoTracking() 
+                .FirstOrDefaultAsync(wallet => wallet.UserId == user.Id);
+        }
+
+        public async Task Add(Wallet wallet)
+        {
+            await _dbContext.Wallets.AddAsync(wallet);
+        }
     }
 }

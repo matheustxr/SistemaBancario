@@ -2,6 +2,7 @@
 using SistemaBancario.Application.AutoMapper;
 using SistemaBancario.Application.UseCases.Login;
 using SistemaBancario.Application.UseCases.Users.Register;
+using SistemaBancario.Application.UseCases.Wallets.Get;
 
 namespace SistemaBancario.Application
 {
@@ -23,6 +24,7 @@ namespace SistemaBancario.Application
             services.AddScoped<IDoLoginUseCase, DoLoginUseCase>();
 
             services.AddScoped<IRegisterUserUseCase, RegisterUserUseCase>();
+            services.AddScoped<IGetBalance, GetBalance>();
         }
     }
 }

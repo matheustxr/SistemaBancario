@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using FluentValidation.Results;
-using Habits.Exception.ExceptionBase;
-using Habits.Exception;
 using SistemaBancario.Communication.Requests;
-using SistemaBancario.Domain.Repositories.User;
+using SistemaBancario.Domain.Entities;
 using SistemaBancario.Domain.Repositories;
+using SistemaBancario.Domain.Repositories.User;
+using SistemaBancario.Domain.Repositories.Wallets;
 using SistemaBancario.Domain.Security.Cryptography;
 using SistemaBancario.Domain.Security.Tokens;
+using SistemaBancario.Exception;
+using SistemaBancario.Exception.ExceptionBase;
 
 namespace SistemaBancario.Application.UseCases.Users.Register
 {
@@ -21,14 +18,16 @@ namespace SistemaBancario.Application.UseCases.Users.Register
         private readonly IPasswordEncrypter _passwordEncripter;
         private readonly IUserReadOnlyRepository _userReadOnlyRepository;
         private readonly IUserWriteOnlyRepository _userWriteOnlyRepository;
-        private readonly IUnityOfWork _unitOfWork;
+        private readonly IWalletWriteOnlyRepository _walletWriteOnlyRepository;
         private readonly IAccessTokenGenerator _tokenGenerator;
+        private readonly IUnityOfWork _unitOfWork;
 
         public RegisterUserUseCase(
             IMapper mapper,
             IPasswordEncrypter passwordEncripter,
             IUserReadOnlyRepository userReadOnlyRepository,
             IUserWriteOnlyRepository userWriteOnlyRepository,
+            IWalletWriteOnlyRepository walletWriteOnlyRepository,
             IAccessTokenGenerator tokenGenerator,
             IUnityOfWork unitOfWork)
         {
@@ -36,8 +35,9 @@ namespace SistemaBancario.Application.UseCases.Users.Register
             _passwordEncripter = passwordEncripter;
             _userReadOnlyRepository = userReadOnlyRepository;
             _userWriteOnlyRepository = userWriteOnlyRepository;
-            _unitOfWork = unitOfWork;
+            _walletWriteOnlyRepository = walletWriteOnlyRepository;
             _tokenGenerator = tokenGenerator;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<ResponseRegisteredUserJson> Execute(RequestRegisterUserJson request)
@@ -50,6 +50,14 @@ namespace SistemaBancario.Application.UseCases.Users.Register
 
             await _userWriteOnlyRepository.Add(user);
 
+            var wallet = new Wallet
+            {
+                UserId = user.Id,
+                Balance = 0 
+            };
+
+            await _walletWriteOnlyRepository.Add(wallet);
+
             await _unitOfWork.Commit();
 
             return new ResponseRegisteredUserJson
@@ -58,7 +66,7 @@ namespace SistemaBancario.Application.UseCases.Users.Register
                 Token = _tokenGenerator.Generate(user)
             };
         }
-
+         
         private async Task Validate(RequestRegisterUserJson request)
         {
             var result = new RegisterUserValidator().Validate(request);

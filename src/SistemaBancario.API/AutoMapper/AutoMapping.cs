@@ -22,6 +22,8 @@ namespace SistemaBancario.Application.AutoMapper
         private void EntityResponse()
         {
             CreateMap<User, ResponseUserProfileJson>();
+
+            CreateMap<Wallet, ResponseWalletBalanceJson>();
         }
     }
 }

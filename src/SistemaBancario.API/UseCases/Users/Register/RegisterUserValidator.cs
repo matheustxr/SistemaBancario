@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using Habits.Exception;
+using SistemaBancario.Exception;
 using SistemaBancario.Communication.Requests;
 
 namespace SistemaBancario.Application.UseCases.Users.Register

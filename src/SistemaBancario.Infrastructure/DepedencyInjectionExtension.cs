@@ -11,6 +11,7 @@ using SistemaBancario.Infrastructure.DataAccess;
 using SistemaBancario.Infrastructure.Sevices.LoggedUser;
 using SistemaBancario.Infrastructure.Security.Tokens;
 using SistemaBancario.Infrastructure.Extensions;
+using SistemaBancario.Domain.Repositories.Wallets;
 
 namespace SistemaBancario.Infrastructure
 {
@@ -44,6 +45,9 @@ namespace SistemaBancario.Infrastructure
 
             services.AddScoped<IUserReadOnlyRepository, UserRepository>();
             services.AddScoped<IUserWriteOnlyRepository, UserRepository>();
+
+            services.AddScoped<IWalletReadOnlyRepository, WalletRepository>();
+            services.AddScoped<IWalletWriteOnlyRepository, WalletRepository>();
         }
 
         private static void AddDbContext(IServiceCollection services, IConfiguration configuration)
