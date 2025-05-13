@@ -164,7 +164,6 @@ A estrutura do projeto é organizada da seguinte maneira:
 │   ├── SistemaBancario.Domain      # Entidades e repositórios
 │   ├── SistemaBancario.Infrastructure # Acesso a dados (EF Core, Migrations)
 │   ├── SistemaBancario.Communication # Requests e Responses
-└── tests/                         # Testes unitários e de integração
 ```
 
 ## Contribuindo
