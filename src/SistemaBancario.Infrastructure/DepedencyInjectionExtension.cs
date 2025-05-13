@@ -12,6 +12,7 @@ using SistemaBancario.Infrastructure.Sevices.LoggedUser;
 using SistemaBancario.Infrastructure.Security.Tokens;
 using SistemaBancario.Infrastructure.Extensions;
 using SistemaBancario.Domain.Repositories.Wallets;
+using SistemaBancario.Domain.Repositories.Transfer;
 
 namespace SistemaBancario.Infrastructure
 {
@@ -48,6 +49,10 @@ namespace SistemaBancario.Infrastructure
 
             services.AddScoped<IWalletReadOnlyRepository, WalletRepository>();
             services.AddScoped<IWalletWriteOnlyRepository, WalletRepository>();
+            services.AddScoped<IWalletUpdateOnlyRepository, WalletRepository>();
+
+            services.AddScoped<ITransferReadOnlyRepository, TransferRepository>();
+            services.AddScoped<ITransferWriteOnlyRepository, TransferRepository>();
         }
 
         private static void AddDbContext(IServiceCollection services, IConfiguration configuration)

@@ -5,13 +5,13 @@ using SistemaBancario.Domain.Services.LoggdUser;
 
 namespace SistemaBancario.Application.UseCases.Wallets.Get
 {
-    public class GetBalance : IGetBalance
+    public class GetBalanceUseCase : IGetBalanceUseCase
     {
         private readonly IWalletReadOnlyRepository _repository;
         private readonly IMapper _mapper;
         private readonly ILoggedUser _loggedUser;
 
-        public GetBalance(IWalletReadOnlyRepository repository, IMapper mapper, ILoggedUser loggedUser)
+        public GetBalanceUseCase(IWalletReadOnlyRepository repository, IMapper mapper, ILoggedUser loggedUser)
         {
             _repository = repository;
             _mapper = mapper;

@@ -2,7 +2,7 @@
 
 namespace SistemaBancario.Application.UseCases.Wallets.Get
 {
-    public interface IGetBalance
+    public interface IGetBalanceUseCase
     {
         Task<ResponseWalletBalanceJson> Execute();
     }

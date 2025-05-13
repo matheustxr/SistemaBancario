@@ -24,6 +24,12 @@ namespace SistemaBancario.Application.AutoMapper
             CreateMap<User, ResponseUserProfileJson>();
 
             CreateMap<Wallet, ResponseWalletBalanceJson>();
+
+            CreateMap<Transfer, TransferItemJson>()
+            .ForMember(dest => dest.Date, opt => opt.MapFrom(src => src.Date))
+            .ForMember(dest => dest.ReceiverEmail, opt => opt.MapFrom(src => src.ReceiverUser.Email))
+            .ForMember(dest => dest.Amount, opt => opt.MapFrom(src => src.Amount))
+            .ForMember(dest => dest.BalanceAfter, opt => opt.MapFrom(src => src.BalanceAfter));
         }
     }
 }

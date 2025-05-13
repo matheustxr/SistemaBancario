@@ -97,6 +97,15 @@ namespace SistemaBancario.Exception {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Insufficient balance to make the transfer..
+        /// </summary>
+        public static string INSUFFICIENT_BALANCE {
+            get {
+                return ResourceManager.GetString("INSUFFICIENT_BALANCE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Your password should be a minimum of 8 characters, containing at least one uppercase letter, one lowercase letter, one number, and one special character (e.g., !, ?, *, .)..
         /// </summary>
         public static string INVALID_PASSWORD {
@@ -115,11 +124,47 @@ namespace SistemaBancario.Exception {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Receiver not found..
+        /// </summary>
+        public static string RECEIVER_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("RECEIVER_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a The transfer amount must be greater than zero..
+        /// </summary>
+        public static string TRANSFER_MUST_BE_ZERO {
+            get {
+                return ResourceManager.GetString("TRANSFER_MUST_BE_ZERO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a You cannot transfer to yourself..
+        /// </summary>
+        public static string TRANSFER_TO_SELF_NOT_ALLOWED {
+            get {
+                return ResourceManager.GetString("TRANSFER_TO_SELF_NOT_ALLOWED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Unknown error.
         /// </summary>
         public static string UNKNOW_ERRO {
             get {
                 return ResourceManager.GetString("UNKNOW_ERRO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Wallet not found..
+        /// </summary>
+        public static string WALLET_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("WALLET_NOT_FOUND", resourceCulture);
             }
         }
     }

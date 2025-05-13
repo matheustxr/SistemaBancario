@@ -8,5 +8,6 @@ namespace SistemaBancario.Infrastructure.DataAccess
         public SistemaBancarioDbContext(DbContextOptions options) : base(options) { }
         public DbSet<User> Users { get; set; }
         public DbSet<Wallet> Wallets { get; set; }
+        public DbSet<Transfer> Transfers { get; set; }
     }
 }

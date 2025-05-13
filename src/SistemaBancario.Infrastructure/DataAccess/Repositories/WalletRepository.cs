@@ -4,7 +4,7 @@ using SistemaBancario.Domain.Repositories.Wallets;
 
 namespace SistemaBancario.Infrastructure.DataAccess.Repositories
 {
-    public class WalletRepository : IWalletReadOnlyRepository, IWalletWriteOnlyRepository
+    public class WalletRepository : IWalletReadOnlyRepository, IWalletWriteOnlyRepository, IWalletUpdateOnlyRepository
     {
         private readonly SistemaBancarioDbContext _dbContext;
         public WalletRepository(SistemaBancarioDbContext dbContext) => _dbContext = dbContext;
@@ -26,6 +26,11 @@ namespace SistemaBancario.Infrastructure.DataAccess.Repositories
         public async Task Add(Wallet wallet)
         {
             await _dbContext.Wallets.AddAsync(wallet);
+        }
+
+        public void Update(Wallet wallet)
+        {
+            _dbContext.Wallets.Update(wallet);
         }
     }
 }
