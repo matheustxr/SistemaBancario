@@ -1,6 +1,7 @@
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -100,23 +101,21 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
 app.UseAuthentication();
 app.UseAuthorization();
-
 app.MapControllers();
 
-if (builder.Configuration.IsTestEnvironment() == false)
+if (!builder.Configuration.IsTestEnvironment())
 {
-    await MigrateDatabase();
+    await using var scope = app.Services.CreateAsyncScope();
+    var provider = scope.ServiceProvider;
+    var db = provider.GetRequiredService<SistemaBancarioDbContext>();
+
+    await db.Database.MigrateAsync();
+
+    db.Seed();
 }
 
 app.Run();
-
-async Task MigrateDatabase()
-{
-    await using var scope = app.Services.CreateAsyncScope();
-    await DataBaseMigration.MigrateDatabase(scope.ServiceProvider);
-}
 
 public partial class Program { }
