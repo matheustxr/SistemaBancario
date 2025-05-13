@@ -7,6 +7,8 @@ using SistemaBancario.Communication.Responses;
 using SistemaBancario.Communication.Requests;
 using SistemaBancario.Exception.ExceptionBase;
 using SistemaBancario.Exception;
+using SistemaBancario.Domain.Repositories.Transfer;
+using SistemaBancario.Domain.Entities;
 
 namespace SistemaBancario.Application.UseCases.Transfer.TransferBalance
 {
@@ -16,6 +18,7 @@ namespace SistemaBancario.Application.UseCases.Transfer.TransferBalance
         private readonly IUserReadOnlyRepository _userReadRepository;
         private readonly IWalletReadOnlyRepository _walletRead;
         private readonly IWalletUpdateOnlyRepository _walletUpdate;
+        private readonly ITransferWriteOnlyRepository _transferWrite;
         private readonly IUnityOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
@@ -24,6 +27,7 @@ namespace SistemaBancario.Application.UseCases.Transfer.TransferBalance
             IUserReadOnlyRepository userReadRepository,
             IWalletReadOnlyRepository walletRead,
             IWalletUpdateOnlyRepository walletUpdate,
+            ITransferWriteOnlyRepository transferWrite,
             IUnityOfWork unitOfWork,
             IMapper mapper)
         {
@@ -31,6 +35,7 @@ namespace SistemaBancario.Application.UseCases.Transfer.TransferBalance
             _userReadRepository = userReadRepository;
             _walletRead = walletRead;
             _walletUpdate = walletUpdate;
+            _transferWrite = transferWrite;
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
@@ -50,7 +55,6 @@ namespace SistemaBancario.Application.UseCases.Transfer.TransferBalance
                 throw new ErrorOnValidationException([ResourceErrorMessages.TRANSFER_TO_SELF_NOT_ALLOWED]);
 
             var senderWallet = await _walletRead.GetByUserId(sender);
-
             var receiverWallet = await _walletRead.GetByUserId(receiver);
 
             if (senderWallet.Balance < request.Amount)
@@ -61,6 +65,19 @@ namespace SistemaBancario.Application.UseCases.Transfer.TransferBalance
 
             _walletUpdate.Update(senderWallet);
             _walletUpdate.Update(receiverWallet);
+
+            
+            var transfer = new Domain.Entities.Transfer
+            {
+                SenderUserId = sender.Id,
+                ReceiverUserId = receiver.Id,
+                Amount = request.Amount,
+                Date = DateTime.UtcNow,
+                BalanceAfter = senderWallet.Balance,
+            };
+
+            await _transferWrite.Add(transfer);
+
             await _unitOfWork.Commit();
 
             return new ResponseTransferBalanceJson

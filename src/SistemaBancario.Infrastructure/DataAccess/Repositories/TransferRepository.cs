@@ -22,16 +22,19 @@ namespace SistemaBancario.Infrastructure.DataAccess.Repositories
         {
             var query = _dbContext.Transfers
                 .AsNoTracking()
+                .Include(t => t.SenderUser)
+                .Include(t => t.ReceiverUser)
                 .Where(t => t.SenderUserId == userId || t.ReceiverUserId == userId);
 
             if (startDate.HasValue)
             {
-                query = query.Where(t => t.Date >= startDate.Value);
+                query = query.Where(t => t.Date >= DateTime.SpecifyKind(startDate.Value.Date, DateTimeKind.Utc));
             }
 
             if (endDate.HasValue)
             {
-                query = query.Where(t => t.Date <= endDate.Value);
+                var finalEndDate = endDate.Value.Date.AddDays(1).AddTicks(-1);
+                query = query.Where(t => t.Date <= DateTime.SpecifyKind(finalEndDate, DateTimeKind.Utc));
             }
 
             return await query
